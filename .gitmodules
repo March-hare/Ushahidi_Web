@@ -4,3 +4,6 @@
 [submodule "plugins/endtime"]
 	path = plugins/endtime
 	url = git@github.com:March-hare/endtime.git
+[submodule "plugins/densitymap"]
+	path = plugins/densitymap
+	url = https://github.com/jetherton/densitymap

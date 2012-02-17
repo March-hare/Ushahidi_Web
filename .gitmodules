@@ -7,3 +7,6 @@
 [submodule "plugins/densitymap"]
 	path = plugins/densitymap
 	url = https://github.com/jetherton/densitymap
+[submodule "plugins/mobile"]
+	path = plugins/mobile
+	url = git@github.com:March-hare/mobile.git

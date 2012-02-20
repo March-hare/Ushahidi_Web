@@ -40,7 +40,7 @@
 			mapOptions = options;
 		}
 		
-		// Create the map object
+    // Create the map object
 		var map = new OpenLayers.Map(targetElement, mapOptions);
 		
 		<?php echo map::layers_js(FALSE); ?>

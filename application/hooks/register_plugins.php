@@ -75,7 +75,7 @@ class register_plugins {
 					{
 						// $plugin_base Variable gives plugin hook access to the base location of the plugin
 						$plugin_base = url::base()."plugins/".$key."/";
-						include $plugin.'/hooks/'.$entry;
+            include $plugin.'/hooks/'.$entry;
 					}
 			}
 		}

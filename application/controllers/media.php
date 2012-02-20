@@ -61,6 +61,7 @@ class Media_Controller extends Controller {
         }
 
         $file = $file_path."/".$file.".".$ext;
+        $mtime = filemtime($file);
         if ( ! file_exists($file)) {
 
             // If the file doesn't exist, just pass an empty file.
@@ -71,7 +72,6 @@ class Media_Controller extends Controller {
         else
         {
 
-            $mtime = filemtime($file);
             $file_data = file_get_contents($file);
 
         }

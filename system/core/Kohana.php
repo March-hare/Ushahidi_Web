@@ -1034,8 +1034,8 @@ final class Kohana {
 	 * @return  string   if the file is found
 	 * @return  FALSE    if the file is not found
 	 */
-	public static function find_file($directory, $filename, $required = FALSE, $ext = FALSE)
-	{
+  public static function find_file($directory, $filename, $required = FALSE, $ext = FALSE)
+  {
 		// NOTE: This test MUST be not be a strict comparison (===), or empty
 		// extensions will be allowed!
 		if ($ext == '')

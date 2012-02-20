@@ -71,7 +71,7 @@ class Main_Controller extends Template_Controller {
 		{
 			if ( ! $this->auth->logged_in('login'))
 			{
-				url::redirect('login/front');
+				url::redirect('login');
 			}
 		}
 		
@@ -111,17 +111,6 @@ class Main_Controller extends Template_Controller {
 		$site_name_style = (strlen($site_name) > 20) ? " style=\"font-size:21px;\"" : "";
 			
 		$this->template->header->private_deployment = Kohana::config('settings.private_deployment');
-		$this->template->header->loggedin_username = FALSE;
-		$this->template->header->loggedin_userid = FALSE;
-		
-		if ( isset(Auth::instance()->get_user()->username) AND isset(Auth::instance()->get_user()->id) )
-		{
-			// Load User
-			$this->user = Auth::instance()->get_user();
-			$this->template->header->loggedin_username = html::specialchars(Auth::instance()->get_user()->username);
-			$this->template->header->loggedin_userid = Auth::instance()->get_user()->id;
-			$this->template->header->loggedin_role = ( Auth::instance()->logged_in('member') ) ? "members" : "admin";
-		}
 		
 		$this->template->header->site_name = $site_name;
 		$this->template->header->site_name_style = $site_name_style;
@@ -136,8 +125,6 @@ class Main_Controller extends Template_Controller {
 		$google_analytics = Kohana::config('settings.google_analytics');
 		$this->template->footer->google_analytics = $this->themes->google_analytics($google_analytics);
 
-        // Load profiler
-        // $profiler = new Profiler;
 
 		// Get tracking javascript for stats
 		$this->template->footer->ushahidi_stats = (Kohana::config('settings.allow_stat_sharing') == 1)
@@ -159,6 +146,22 @@ class Main_Controller extends Template_Controller {
 		
 		// Display news feeds?
 		$this->template->header->allow_feed = Kohana::config('settings.allow_feed');
+		
+		// Header Nav
+		$header_nav = new View('header_nav');
+		$this->template->header->header_nav = $header_nav;
+		$this->template->header->header_nav->loggedin_user = FALSE;
+		if ( isset(Auth::instance()->get_user()->id) )
+		{
+			// Load User
+			$this->template->header->header_nav->loggedin_role = ( Auth::instance()->logged_in('member') ) ? "members" : "admin";
+			$this->template->header->header_nav->loggedin_user = Auth::instance()->get_user();
+		}
+		$this->template->header->header_nav->site_name = Kohana::config('settings.site_name');
+
+        // Load profiler
+        //$this->profiler = new Profiler;
+
 	}
 
 	/**
@@ -224,6 +227,7 @@ class Main_Controller extends Template_Controller {
 		$parent_categories = array();
 		foreach (ORM::factory('category')
 				->where('category_visible', '1')
+				->where('id != 5')
 				->where('parent_id', '0')
 				->find_all() as $category)
 		{
@@ -243,16 +247,6 @@ class Main_Controller extends Template_Controller {
 						$child->category_color,
 						$ca_img
 					);
-
-					if ($child->category_trusted)
-					{ 
-						// Get Trusted Category Count
-						$trusted = $this->get_trusted_category_count($child->id);
-						if ( ! $trusted->count_all())
-						{
-							unset($children[$child->id]);
-						}
-					}
 				}
 			}
 
@@ -267,16 +261,6 @@ class Main_Controller extends Template_Controller {
 				$ca_img,
 				$children
 			);
-
-			if ($category->category_trusted)
-			{ 
-				// Get Trusted Category Count
-				$trusted = $this->get_trusted_category_count($category->id);
-				if ( ! $trusted->count_all())
-				{
-					unset($parent_categories[$category->id]);
-				}
-			}
 		}
 		$this->template->content->categories = $parent_categories;
 
@@ -297,16 +281,6 @@ class Main_Controller extends Template_Controller {
 			$layers = $config_layers;
 		}
 		$this->template->content->layers = $layers;
-
-		// Get all active Shares
-		$shares = array();
-		foreach (ORM::factory('sharing')
-				  ->where('sharing_active', 1)
-				  ->find_all() as $share)
-		{
-			$shares[$share->id] = array($share->sharing_name, $share->sharing_color);
-		}
-		$this->template->content->shares = $shares;
 
 		// Get Default Color
 		$this->template->content->default_map_all = Kohana::config('settings.default_map_all');

@@ -115,6 +115,7 @@ class Users_Controller extends Admin_Controller
 			'username'  => '',
 			'name'      => '',
 			'email'     => '',
+            'password'  => '',
 			'notify'    => '',
 			'role'      => ''
 		);
@@ -155,6 +156,13 @@ class Users_Controller extends Admin_Controller
 				if ($user_id == NULL)
 				{
 					$user->password = $post->password;
+				}
+
+				// We can only set a new password if we are using the standard ORM method,
+				//    otherwise it won't actually change the password used for authentication
+				if (isset($post->new_password) AND kohana::config('riverid.enable') == FALSE)
+				{
+					$user->password = $post->new_password;
 				}
 
 				// Existing User??
@@ -235,7 +243,6 @@ class Users_Controller extends Admin_Controller
 			->orderby('name', 'asc')
 			->find_all();
 
-		$role_array = array("login" => "NONE");
 		foreach ($roles as $role)
 		{
 			$role_array[$role->name] = strtoupper($role->name);
@@ -374,6 +381,7 @@ class Users_Controller extends Admin_Controller
 
 
         $roles = ORM::factory('role')
+			->where('id != 1')
             ->orderby('access_level', 'desc')
             ->find_all();
 

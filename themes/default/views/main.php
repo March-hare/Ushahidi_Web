@@ -23,11 +23,11 @@
 					{
 						$category_title = $category_info[0];
 						$category_color = $category_info[1];
-						$category_image = '';
+						$category_image = ($category_info[2] != NULL) ? url::convert_uploaded_to_abs($category_info[2]) : NULL;
 						$color_css = 'class="swatch" style="background-color:#'.$category_color.'"';
 						if($category_info[2] != NULL) {
 							$category_image = html::image(array(
-								'src'=>$category_info[2],
+								'src'=>$category_image,
 								'style'=>'float:left;padding-right:5px;'
 								));
 							$color_css = '';
@@ -42,11 +42,11 @@
                                                     {
                                                             $child_title = $child_info[0];
                                                             $child_color = $child_info[1];
-                                                            $child_image = '';
+                                                            $child_image = ($child_info[2] != NULL) ? url::convert_uploaded_to_abs($child_info[2]) : NULL;
                                                             $color_css = 'class="swatch" style="background-color:#'.$child_color.'"';
-                                                            if($child_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$child_info[2])) {
+                                                            if($child_info[2] != NULL) {
                                                                     $child_image = html::image(array(
-                                                                            'src'=>Kohana::config('upload.relative_directory').'/'.$child_info[2],
+                                                                            'src'=>$child_image,
                                                                             'style'=>'float:left;padding-right:5px;'
                                                                             ));
                                                                     $color_css = '';
@@ -83,30 +83,6 @@
 						echo '<li><a href="#" id="layer_'. $layer .'"
 						onclick="switchLayer(\''.$layer.'\',\''.$layer_link.'\',\''.$layer_color.'\'); return false;"><div class="swatch" style="background-color:#'.$layer_color.'"></div>
 						<div>'.$layer_name.'</div></a></li>';
-					}
-					?>
-				</ul>
-				<!-- /Layers -->
-				<?php
-			}
-			?>
-
-			<?php
-			if ($shares)
-			{
-				?>
-				<!-- Layers (Other Ushahidi Layers) -->
-				<div class="cat-filters clearingfix" style="margin-top:20px;">
-					<strong><?php echo Kohana::lang('ui_main.other_ushahidi_instances');?> <span>[<a href="javascript:toggleLayer('sharing_switch_link', 'sharing_switch')" id="sharing_switch_link"><?php echo Kohana::lang('ui_main.hide'); ?></a>]</span></strong>
-				</div>
-				<ul id="sharing_switch" class="category-filters">
-					<?php
-					foreach ($shares as $share => $share_info)
-					{
-						$sharing_name = $share_info[0];
-						$sharing_color = $share_info[1];
-						echo '<li><a href="#" id="share_'. $share .'"><div class="swatch" style="background-color:#'.$sharing_color.'"></div>
-						<div>'.$sharing_name.'</div></a></li>';
 					}
 					?>
 				</ul>

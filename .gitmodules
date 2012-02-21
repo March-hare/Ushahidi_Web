@@ -1,3 +1,6 @@
 [submodule "plugins/decayimage"]
 	path = plugins/decayimage
 	url = git://github.com/March-hare/decayimage.git
+[submodule "plugins/endtime"]
+	path = plugins/endtime
+	url = git://github.com/March-hare/endtime.git

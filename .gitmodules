@@ -7,3 +7,9 @@
 [submodule "plugins/InfoWindow"]
 	path = plugins/InfoWindow
 	url = git://github.com/March-hare/InfoWindow.git
+[submodule "git:/github.com/March-hare/sectors.git"]
+	path = git:/github.com/March-hare/sectors.git
+	url = git://github.com/March-hare/sectors.git
+[submodule "plugins/sectors"]
+	path = plugins/sectors
+	url = git://github.com/March-hare/sectors.git

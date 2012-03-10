@@ -13,3 +13,6 @@
 [submodule "plugins/sectors"]
 	path = plugins/sectors
 	url = git://github.com/March-hare/sectors.git
+[submodule "plugins/sms_filter"]
+	path = plugins/sms_filter
+	url = git://github.com/March-hare/sms_filter.git

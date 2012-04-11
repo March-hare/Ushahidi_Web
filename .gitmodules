@@ -16,3 +16,6 @@
 [submodule "plugins/sms_filter"]
 	path = plugins/sms_filter
 	url = git://github.com/March-hare/sms_filter.git
+[submodule "themes/march_hare"]
+	path = themes/march_hare
+	url = git://github.com/March-hare/March-Hare-Ushahidi-Theme.git

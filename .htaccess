@@ -16,6 +16,7 @@
   # We want the main page the /main ink to go to decayimage
 	RewriteRule ^main$ decayimage [L,R=permanent]
 	RewriteRule ^main/(.*) decayimage/$1 [L,R=permanent]
+	RewriteRule ^reports$ decayimage [L,R=permanent]
 	RewriteRule ^$ decayimage [L,R=permanent]
 
   # We also want all references to /alerts to go to /messaging

@@ -13,10 +13,10 @@
 	RewriteCond %{REMOTE_ADDR} !^127.0.0.1$
 	RewriteRule ^scheduler - [F,L]
 
-  # We want the main page the /main ink to go to reports
-	RewriteRule ^main$ reports [L,R=permanent]
-	RewriteRule ^main/(.*) reports/$1 [L,R=permanent]
-	RewriteRule ^$ reports [L,R=permanent]
+  # We want the main page the /main ink to go to decayimage
+	RewriteRule ^main$ decayimage [L,R=permanent]
+	RewriteRule ^main/(.*) decayimage/$1 [L,R=permanent]
+	RewriteRule ^$ decayimage [L,R=permanent]
 
   # We also want all references to /alerts to go to /messaging
 	RewriteRule ^alerts$ messaging [L,R=permanent]

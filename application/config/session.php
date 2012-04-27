@@ -3,3 +3,4 @@
 // Enable session encryption
 $config['name'] = 'ushahidi';
 $config['encryption'] = TRUE;
+$config['driver'] = 'database';

@@ -6,6 +6,7 @@ application/logs/*
 application/cache/*
 media/uploads/*
 application/config/database.php
+application/config/encryption.php
 tests/phpunit/phpunit.xml
 *tgz
 *patch

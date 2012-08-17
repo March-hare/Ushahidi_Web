@@ -4,7 +4,7 @@
  *
  * Session driver name.
  */
-$config['driver'] = 'cookie';
+$config['driver'] = 'database';
 
 /**
  * Session storage parameter, used by drivers.
@@ -34,7 +34,7 @@ $config['validate'] = array('user_agent', 'ip_address');
  * Number of page loads before the session id is regenerated.
  * A value of 0 will disable automatic session id regeneration.
  */
-//$config['regenerate'] = 3;
+$config['regenerate'] = 0;
 
 /**
  * Percentage probability that the gc (garbage collection) routine is started.
